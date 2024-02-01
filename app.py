@@ -27,17 +27,21 @@ petal_width = float(petal_width)
 
 # Button to trigger prediction
 if st.button("Predict"):
-    # Preprocess input features
-    input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
-    input_data_scaled = feature_scaler.transform(input_data)
+    # Check if all input values are provided
+    if sepal_length == 0.0 or sepal_width == 0.0 or petal_length == 0.0 or petal_width == 0.0:
+        st.warning("Please enter valid values for all features.")
+    else:
+        # Preprocess input features
+        input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
+        input_data_scaled = feature_scaler.transform(input_data)
 
-    # Predictions using Random Forest
-    rf_prediction = rf_classifier.predict(input_data_scaled)[0]
+        # Predictions using Random Forest
+        rf_prediction = rf_classifier.predict(input_data_scaled)[0]
 
-    # Display Predicted Class
-    st.subheader("Prediction:")
-    st.write(f"Predicted Class (Random Forest): {iris.target_names[rf_prediction]}")
+        # Display Predicted Class
+        st.subheader("Prediction:")
+        st.write(f"Predicted Class (Random Forest): {iris.target_names[rf_prediction]}")
 
-    # Display corresponding image
-    image_path = f"{iris.target_names[rf_prediction].lower()}.jpg"
-    st.image(image_path, caption=f"{iris.target_names[rf_prediction]}", use_column_width=True)
+        # Display corresponding image
+        image_path = f"{iris.target_names[rf_prediction].lower()}.jpg"
+        st.image(image_path, caption=f"{iris.target_names[rf_prediction]}", use_column_width=True)
