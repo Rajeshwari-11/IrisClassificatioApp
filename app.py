@@ -35,7 +35,7 @@ if st.button("Predict"):
     rf_prediction = rf_classifier.predict(input_data_scaled)[0]
 
     # Display Predicted Class
-    st.subheader("Random Forest Prediction:")
+    st.subheader("Prediction:")
     st.write(f"Predicted Class (Random Forest): {iris.target_names[rf_prediction]}")
 
     # Display corresponding image
