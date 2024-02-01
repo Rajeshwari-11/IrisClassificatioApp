@@ -34,6 +34,10 @@ if st.button("Predict"):
     # Predictions using Random Forest
     rf_prediction = rf_classifier.predict(input_data_scaled)[0]
 
-    # Display Predictions
+    # Display Predicted Class
     st.subheader("Random Forest Prediction:")
     st.write(f"Predicted Class (Random Forest): {iris.target_names[rf_prediction]}")
+
+    # Display corresponding image
+    image_path = f"{iris.target_names[rf_prediction].lower()}.jpg"
+    st.image(image_path, caption=f"{iris.target_names[rf_prediction]}", use_column_width=True)
